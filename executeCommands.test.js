@@ -45,4 +45,16 @@ test('should handle upward and downward rotations, changing Z-index', () => {
     expect(result.finalPosition).toEqual([0, 1, -1]);
     expect(result.finalDirection).toBe('N');
 });
+
+
+test('should handle upward and downward rotations, changing Z-index', () => {
+    const initialPosition = [0, 0, 0];
+    const initialDirection = 'N';
+    const commands =["f","r","u"];;
+
+    const result = executeCommands(initialPosition, initialDirection, commands);
+
+    expect(result.finalPosition).toEqual([0, 1, 0]);
+    expect(result.finalDirection).toBe('Up');
+});
 // Add more test cases for different scenarios

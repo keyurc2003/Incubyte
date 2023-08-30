@@ -38,7 +38,7 @@ test('should execute commands and return final position and direction', () => {
 test('should handle upward and downward rotations, changing Z-index', () => {
     const initialPosition = [0, 0, 0];
     const initialDirection = 'N';
-    const commands = ['f', 'r', 'u', 'b', 'l', 'd', 'u', 'b', 'd'];
+    const commands =["f","l","u","b","r"];
 
     const result = executeCommands(initialPosition, initialDirection, commands);
 

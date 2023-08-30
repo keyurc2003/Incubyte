@@ -1,55 +1,99 @@
-function executeCommands(initialPosition, initialDirection, commands) {
-    let position = [...initialPosition];
-    let direction = initialDirection;
+function executeCommands (initialPosition, initialDirection, commands) {
+  let position = [...initialPosition]
+  let direction = initialDirection
 
-    let prv;
-    for (const command of commands) {
-        if (command === 'f') {
-            if (direction === 'N') position[1]++; 
-            else if (direction === 'S') position[1]--; 
-            else if (direction === 'E') position[0]++; 
-            else if (direction === 'W') position[0]--; 
-        } else if (command === 'b') {
-            if (direction === 'N') position[1]--;
-            else if (direction === 'S') position[1]++;
-            else if (direction === 'E') position[0]--; 
-            else if (direction === 'W') position[0]++;
-            else if (direction === 'Up') position[2]--;
-        } else if (command === 'r') {
-            if (direction === 'N') direction = 'E';
-            else if (direction === 'E') direction = 'S';     
-            else if (direction === 'S') direction = 'W';
-            else if (direction === 'W') direction = 'N';
-            
-        } else if (command === 'l') {
-            if(direction === "Up" )  direction="N";
-            else if (direction === 'N') direction = 'W';
-            else if (direction === 'W') direction = 'S';
-            else if (direction === 'S') direction = 'E';
-            else if (direction === 'E') direction = 'N';
-        
-        } else if (command === 'u') {
-            if (direction === 'N') direction = 'Up';
-            else if (direction === 'E') direction = 'Up';
-            else if (direction === 'Up') direction = 'S';
-            else if (direction === 'S') direction = 'Down';
-            else if (direction === 'Down') direction = 'N';
-            prv=command;
-            // position[2]++;  //z index not changed
-        } else if (command === 'd') {
-            if (direction === 'N') direction = 'Down';
-            else if (direction === 'Down') direction = 'S';
-            else if (direction === 'S') direction = 'Up';
-            else if (direction === 'Up') direction = 'N';
-            prv=command;
-            // position[2]--;  
+  let prv='N'
+  for (const command of commands) {
+    if (command === 'f') {
+      if (direction === 'N') position[1]++
+      else if (direction === 'S') position[1]--
+      else if (direction === 'E') position[0]++
+      else if (direction === 'W') position[0]--
+      else if (direction === 'Up') position[2]++
+      else if (direction === 'Down') position[2]--
+    } else if (command === 'b') {
+      if (direction === 'N') position[1]--
+      else if (direction === 'S') position[1]++
+      else if (direction === 'E') position[0]--
+      else if (direction === 'W') position[0]++
+      else if (direction === 'Up') position[2]--
+      else if (direction === 'Down') position[2]
+    } else if (command === 'r') {
+      if (direction === 'N') {
+        direction = 'E'
+        prv = 'E'
+      } else if (direction === 'E') {
+        direction = 'S'
+        prv = 'S'
+      } else if (direction === 'S') {
+        direction = 'W'
+        prv = 'W'
+      } else if (direction === 'W') {
+        direction = 'N'
+        prv = 'W'
+      }
+
+      if (direction === 'Up' || direction === 'Down') {
+        if (prv === 'N') {
+          direction = 'E'
+          prv = 'E'
+        } else if (prv === 'E') {
+          direction = 'S'
+          prv = 'S'
+        } else if (prv === 'S') {
+          direction = 'W'
+          prv = 'W'
+        } else if (prv === 'W') {
+          direction = 'N'
+          prv = 'N'
         }
+      }
+
+
+    } else if (command === 'l') {
+      if (direction === 'N') {
+        direction = 'W'
+        prv = 'W'
+      } else if (direction === 'E') {
+        direction = 'N'
+        prv = 'N'
+      } else if (direction === 'S') {
+        direction = 'E'
+        prv = 'E'
+      } else if (direction === 'W') {
+        direction = 'S'
+        prv = 'S'
+      }
+
+      if (direction === 'Up' || direction === 'Down') {
+        if (prv === 'N') {
+          direction = 'W'
+          prv = 'W'
+        } else if (prv === 'E') {
+          direction = 'N'
+          prv = 'N'
+        } else if (prv === 'S') {
+          direction = 'E'
+          prv = 'E'
+        } else if (prv === 'W') {
+          direction = 'S'
+          prv = 'S'
+        }
+      }
+    } else if (command === 'u') {
+      direction = "Up"
+      // position[2]++;  //z index not changed
+    } else if (command === 'd') {
+      direction = "Down";
+    //   prv = command
+      // position[2]--;
     }
-    console.log(position)
-    return {
-        finalPosition: position,
-        finalDirection: direction
-    };
+  }
+  console.log(position)
+  return {
+    finalPosition: position,
+    finalDirection: direction
+  }
 }
 
-module.exports = executeCommands;
+module.exports = executeCommands

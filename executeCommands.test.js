@@ -12,4 +12,37 @@ test('should execute commands and return final position and direction', () => {
     expect(result.finalDirection).toBe('N');
 });
 
+test('should execute commands and return final position and direction', () => {
+    const initialPosition = [0, 0, 0];
+    const initialDirection = 'N';
+    const commands = ['f'];
+
+    const result = executeCommands(initialPosition, initialDirection, commands);
+
+    expect(result.finalPosition).toEqual([0, 1, 0]);
+    expect(result.finalDirection).toBe('N');
+});
+
+test('should execute commands and return final position and direction', () => {
+    const initialPosition = [0, 0, 0];
+    const initialDirection = 'N';
+    const commands = [''];
+
+    const result = executeCommands(initialPosition, initialDirection, commands);
+
+    expect(result.finalPosition).toEqual([0, 0, 0]);
+    expect(result.finalDirection).toBe('N');
+});
+
+
+test('should handle upward and downward rotations, changing Z-index', () => {
+    const initialPosition = [0, 0, 0];
+    const initialDirection = 'N';
+    const commands = ['f', 'r', 'u', 'b', 'l', 'd', 'u', 'b', 'd'];
+
+    const result = executeCommands(initialPosition, initialDirection, commands);
+
+    expect(result.finalPosition).toEqual([0, 1, -1]);
+    expect(result.finalDirection).toBe('N');
+});
 // Add more test cases for different scenarios
